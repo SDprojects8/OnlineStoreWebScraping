@@ -23,6 +23,11 @@ for pg in range(0,pages):
 	#containers = PageSoup.find_all("div")
 	#print(containers)
 	#print("###########\n")
+	print("Container Length     :" + str(len(containers)))
+	print("ratingsAll Length    :" + str(len(ratingsAll)))
+	print("pricesAll Length     :" + str(len(pricesAll)))
+	print("oldPricesAll Length  :" + str(len(oldPricesAll)))
+	print("discountsAll Length  :" + str(len(discountsAll)))
 
 	itemName = []
 	for container in containers:
@@ -37,42 +42,47 @@ for pg in range(0,pages):
 	rating = []
 	for ratingDiv in ratingsAll:
 		#print(ratingDiv.text)
-		rating.append(ratingDiv.text)
+		try:
+			rating.append(ratingDiv.text)
+		except IndexError:
+			pass
+		continue
 
 	price = []
 	for pricesDiv in pricesAll:
 		#print(pricesDiv.text)
-		price.append(pricesDiv.text)
+		try:
+			price.append(pricesDiv.text)
+		except IndexError:
+			pass
+		continue		
 
 	oldPrice = []
 	for oldPricesDiv in oldPricesAll:
 		#print(oldPricesDiv.text)
-		oldPrice.append(oldPricesDiv.text)
+		try:
+			oldPrice.append(oldPricesDiv.text)
+		except IndexError:
+			pass
+		continue
 
 	discount = []
 	for discountsDiv in discountsAll:
 		#print(discountsDiv.text)
-		discount.append(discountsDiv.text)
+		try:
+			discount.append(discountsDiv.text)
+		except IndexError:
+			pass
+		continue
 
 	itemNumber = 0
 	
 	for itemNumber in range(0,len(containers)):
-		print ("##### " + itemName[itemNumber] + "|" + rating[itemNumber] + "|" + price[itemNumber] + "|" + oldPrice[itemNumber] + "|" + discount[itemNumber])
+		try:
+			print ("##### " + itemName[itemNumber] + "|" + rating[itemNumber] + "|" + price[itemNumber] + "|" + oldPrice[itemNumber] + "|" + discount[itemNumber])
+		except IndexError:
+			pass
+		continue
 
 
 
-
-
-"""containers = PageSoup.find_all("div", {"class":"item-container"})
-print(containers)
-
-for container in containers:
-	brand = container.div.div.a.img["title"]
-	item = container.a.img["title"]
-	priceClass = container.find_all("div", {"class":"item-action"})
-	#for priceTag in priceClass:
-	#	price = priceTag.ul.li["title"]
-
-	print("brand  :" + brand)
-	print("item   :" + item)
-	#print("price  :" + price)"""
