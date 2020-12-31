@@ -11,11 +11,11 @@ DT = datetime.datetime.now()
 DateStamp = DT.strftime('%Y-%m-%d_%H-%M-%S')
 
 # Inputs
-pages=3
+pages=20
 #pages = input("How many pages do you want to scan :  ")
-baseURL = 'https://www.flipkart.com/kitchen-cookware-serveware/bakeware/pr?sid=upp%2Cbgd&offer=nb:mp:114b43bd28,nb:mp:114c76b528&hpid=raTquFPh2dVzU7zKGnuhF6p7_Hsxr70nj65vMAAFKlc=&fm=neo%2Fmerchandising&iid=M_9911b1fd-044c-46b5-9132-43310cf1cfbb_2.RBVM3W9LQHB8&ssid=h6bfjo0ng00000001609335246968&otracker=clp_omu_infinite_Deals%2Bof%2Bthe%2BDay_3_2.dealCard.OMU_INFINITE_dotd-store_dotd-store_RBVM3W9LQHB8&cid=RBVM3W9LQHB8'
+baseURL = 'https://www.flipkart.com/clothing-and-accessories/pr?sid=clo&otracker=categorytree&p%5B%5D=facets.ideal_for%255B%255D%3DGirls&p%5B%5D=facets.ideal_for%255B%255D%3DBoys%2B%2526%2BGirls&p%5B%5D=facets.ideal_for%255B%255D%3DBaby%2BBoys%2B%2526%2BBaby%2BGirls&p%5B%5D=facets.ideal_for%255B%255D%3DBaby%2BGirls&otracker=nmenu_sub_Baby%20%26%20Kids_0_Girls%27%20Clothing'
 #CSVpath = input("Provide the full path where CSV reports shall be stored ... :  ")
-CSVfile = "../collect/Flipkart_Deals.of.the.Day_Bakeware_%s.CSV" % DateStamp #Assuming you run from scripts directory
+CSVfile = "../collect/Flipkart_GirlDresses_%s_.CSV" % DateStamp #Assuming you run from scripts directory
 #OutCSV = open(CSVpath + "/" + CSVfile, 'w', newline='')
 
 # Main
@@ -23,9 +23,9 @@ CSVfile = "../collect/Flipkart_Deals.of.the.Day_Bakeware_%s.CSV" % DateStamp #As
 OutCSV = open(CSVfile, 'w', encoding="utf-8", newline='')
 OutWriter = csv.writer(OutCSV)
 
-print("SlNo.|itemName|rating|price|oldPrice|discount")
+print("Brand|ItemName|ItemType|price|oldPrice|discount")
 #OutWriter.writerow("SlNo.|itemName|rating|price|oldPrice|discount")
-OutWriter.writerow("IRPOD")
+OutWriter.writerow("BITPOD")
 for pg in range(0,pages):
 	URL = (baseURL + "&page=" + str(pg))
 	#print("\n\n\n ############# \n Now URL is :    " + URL)
@@ -36,38 +36,60 @@ for pg in range(0,pages):
 	uReq.close()
 
 	PageSoup = soup(HtmlPage, "html.parser")
-	containers = PageSoup.find_all("div", {"class":"_4ddWXP"})
-	ratingsAll = PageSoup.find_all("div", {"class":"_3LWZlK"})
+	brandsALL = PageSoup.find_all("div", {"class":"_2WkVRV"})
+	itemsALL = PageSoup.find_all("div", {"class":"_2B099V"})
+	itemTypesALL = PageSoup.find_all("div", {"class":"_3eWWd-"})
+	#ratingsAll = PageSoup.find_all("div", {"class":"_3LWZlK"})
 	pricesAll = PageSoup.find_all("div", {"class":"_30jeq3"})
 	oldPricesAll = PageSoup.find_all("div", {"class":"_3I9_wc"})
 	discountsAll = PageSoup.find_all("div", {"class":"_3Ay6Sb"})
+	imageLinksAll = PageSoup.find_all("img", {"class":"_2r_T1I"})
 	#containers = PageSoup.find_all("div")
 	#print(containers)
 	#print("###########\n")
-	#print("Container Length     :" + str(len(containers)))
+	#print("Brand     Length     :" + str(len(brands)))
+	#print("Item      Length     :" + str(len(itemsALL)))
 	#print("ratingsAll Length    :" + str(len(ratingsAll)))
 	#print("pricesAll Length     :" + str(len(pricesAll)))
 	#print("oldPricesAll Length  :" + str(len(oldPricesAll)))
 	#print("discountsAll Length  :" + str(len(discountsAll)))
 
+	brand = []
+	for brandDIV in brandsALL:
+		#print(ratingDiv.text)
+		try:
+			brand.append(brandDIV.text)
+		except IndexError:
+			pass
+		continue
+
 	itemName = []
-	for container in containers:
-		itemName.append(container.a.img["alt"])
+	for itemNameDiv in itemsALL:
+		itemName.append(itemNameDiv.a.text)
 		#rating = container.div.div
 		#rating = container.find_all("div", {"class:":"_3LWZlK"})
 		#print("##### Item Name:   " + itemName + "\n")
 		#print("###### Item: " + itemName + "\n##Rating: " + rating + "~~~~~\n\n")
 		#print(rating + " - " + itemName)
 		#item = container.a.img["title"]
-
-	rating = []
-	for ratingDiv in ratingsAll:
+	
+	itemType = []
+	for itemTypeDiv in itemTypesALL:
 		#print(ratingDiv.text)
 		try:
-			rating.append(ratingDiv.text)
+			itemType.append(itemTypeDiv.text)
 		except IndexError:
 			pass
 		continue
+
+	# rating = []
+	# for ratingDiv in ratingsAll:
+	#	# print(ratingDiv.text)
+		# try:
+			# rating.append(ratingDiv.text)
+		# except IndexError:
+			# pass
+		# continue
 
 	price = []
 	for pricesDiv in pricesAll:
@@ -96,12 +118,21 @@ for pg in range(0,pages):
 			pass
 		continue
 
+	imageLink = []
+	for imageLinkDiv in imageLinksAll:
+		#print(discountsDiv.text)
+		try:
+			imageLink.append(imageLinkDiv.img)
+		except IndexError:
+			pass
+		continue
+
 	itemNumber = 0
 	
-	for itemNumber in range(0,len(containers)):
+	for itemNumber in range(0,len(itemsALL)):
 		try:
-			print ("##### " + itemName[itemNumber] + "|" + rating[itemNumber] + "|" + price[itemNumber] + "|" + oldPrice[itemNumber] + "|" + discount[itemNumber])
-			OutWriter.writerow([itemName[itemNumber], rating[itemNumber], price[itemNumber], oldPrice[itemNumber], discount[itemNumber]])
+			print ("##### " + brand[itemNumber] + "|" + itemName[itemNumber] + "|" + itemType[itemNumber] + "|" + price[itemNumber] + "|" + oldPrice[itemNumber] + "|" + discount[itemNumber])
+			OutWriter.writerow([brand[itemNumber], itemName[itemNumber], itemType[itemNumber], price[itemNumber], oldPrice[itemNumber], discount[itemNumber], imageLink[itemNumber]])
 		except IndexError:
 			pass
 		continue

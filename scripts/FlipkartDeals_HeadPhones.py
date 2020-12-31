@@ -10,17 +10,19 @@ import csv
 DT = datetime.datetime.now()
 DateStamp = DT.strftime('%Y-%m-%d_%H-%M-%S')
 #CSVpath = input("Provide the full path where CSV reports shall be stored ... :  ")
-CSVfile = "../data/Flipkart_Deals.of.the.Day_%s.CSV" % DateStamp #Assuming you run from scripts directory
+CSVfile = "../collect/Flipkart_Deals.of.the.Day_HaadPhones_%s.CSV" % DateStamp #Assuming you run from scripts directory
 #OutCSV = open(CSVpath + "/" + CSVfile, 'w', newline='')
 OutCSV = open(CSVfile, 'w', encoding="utf-8", newline='')
 OutWriter = csv.writer(OutCSV)
 
 
-pages=3
+pages=10
+#pages = input("How many pages do you want to scan :  ")
 baseURL = 'https://www.flipkart.com/audio-video/pr?sid=0pm&marketplace=FLIPKART&offer=nb:mp:1154f86928,nb:mp:11cc851a28&hpid=u0KJH80uWRAYeEJJpMIZYap7_Hsxr70nj65vMAAFKlc=&fm=neo%2Fmerchandising&iid=M_62ce2069-ba72-4633-a9f3-272c137582ba_2.VLO9AZPF3DJW&ppt=clp&ppn=dotd-store&ssid=m03cg1ws6o0000001609272953413&otracker=clp_omu_infinite_Deals%2Bof%2Bthe%2BDay_2_2.dealCard.OMU_INFINITE_dotd-store_dotd-store_VLO9AZPF3DJW&cid=VLO9AZPF3DJW'
 
 print("SlNo.|itemName|rating|price|oldPrice|discount")
-OutWriter.writerow("SlNo.|itemName|rating|price|oldPrice|discount")
+#OutWriter.writerow("SlNo.|itemName|rating|price|oldPrice|discount")
+OutWriter.writerow("IRPOD")
 for pg in range(0,pages):
 	URL = (baseURL + "&page=" + str(pg))
 	#print("\n\n\n ############# \n Now URL is :    " + URL)

@@ -1,6 +1,7 @@
 #Custom
 .csv
 .CSV
+collect\
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
