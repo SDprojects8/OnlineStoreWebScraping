@@ -1,6 +1,6 @@
 #!/usr/bin/python
 # Sumit Das 2020 12 29
-# Get Deals of the Day from Flipkart - Headphones
+# Get Deals of the Day from Flipkart - Flipkart_GirlDresses_
 
 from bs4 import BeautifulSoup as soup
 from urllib.request import urlopen as uOpen
@@ -120,9 +120,9 @@ for pg in range(0,pages):
 
 	imageLink = []
 	for imageLinkDiv in imageLinksAll:
-		#print(discountsDiv.text)
+		print(imageLinkDiv.text)
 		try:
-			imageLink.append(imageLinkDiv.img)
+			imageLink.append(imageLinkDiv.img['src'])
 		except IndexError:
 			pass
 		continue

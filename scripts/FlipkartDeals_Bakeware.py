@@ -1,6 +1,6 @@
 #!/usr/bin/python
 # Sumit Das 2020 12 29
-# Get Deals of the Day from Flipkart - Headphones
+# Get Deals of the Day from Flipkart - Day_Bakeware_
 
 from bs4 import BeautifulSoup as soup
 from urllib.request import urlopen as uOpen
