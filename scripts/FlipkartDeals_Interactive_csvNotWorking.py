@@ -1,6 +1,6 @@
 #!/usr/bin/python
 # Sumit Das 2020 12 29
-# Get Deals of the Day from Flipkart - Headphones
+# Get Deals of the Day from Flipkart - Day_Bakeware_
 
 from bs4 import BeautifulSoup as soup
 from urllib.request import urlopen as uOpen
@@ -12,20 +12,22 @@ DateStamp = DT.strftime('%Y-%m-%d_%H-%M-%S')
 
 # Inputs
 # pages=20
-baseURL = input("Please provide the base URL         :  ")
-Purpose = input("Please provide a Topic of Interest  :  ")
-pages =   input("How many pages do you want to scan  :  ")
-
+baseURL = input("Please provide the base URL       :  ")
+Purpose = input("Please provide a Topic of Interest:  ")
+pages = input("How many pages do you want to scan  :  ")
+#baseURL = 'https://www.flipkart.com/kitchen-cookware-serveware/bakeware/pr?sid=upp%2Cbgd&offer=nb:mp:114b43bd28,nb:mp:114c76b528&hpid=raTquFPh2dVzU7zKGnuhF6p7_Hsxr70nj65vMAAFKlc=&fm=neo%2Fmerchandising&iid=M_9911b1fd-044c-46b5-9132-43310cf1cfbb_2.RBVM3W9LQHB8&ssid=h6bfjo0ng00000001609335246968&otracker=clp_omu_infinite_Deals%2Bof%2Bthe%2BDay_3_2.dealCard.OMU_INFINITE_dotd-store_dotd-store_RBVM3W9LQHB8&cid=RBVM3W9LQHB8'
 CSVpath = input("Provide the full path where CSV reports shall be stored ... :  ")
-CSVfile = "Flipkart_INTERACTIVE_%s.CSV" % DateStamp #Assuming you run from scripts directory
+CSVfile = "../collect/Flipkart_BOTTLES_%s_.CSV" % DateStamp #Assuming you run from scripts directory
 #OutCSV = open(CSVpath + "/" + CSVfile, 'w', newline='')
+
+# Main
+
 OutCSV = open(CSVfile, 'w', encoding="utf-8", newline='')
 OutWriter = csv.writer(OutCSV)
 
-#print("SlNo.|itemName|rating|price|oldPrice|discount")
-print("\n Ouput will be displayed in a moment ... \n")
+print("SlNo.|itemName|rating|price|oldPrice|discount")
 #OutWriter.writerow("SlNo.|itemName|rating|price|oldPrice|discount")
-OutWriter.writerow("IRPOD")
+OutWriter.writerow("IRPODL")
 for pg in range(0,(int(pages))):
 	URL = (baseURL + "&page=" + str(pg))
 	#print("\n\n\n ############# \n Now URL is :    " + URL)
@@ -38,20 +40,18 @@ for pg in range(0,(int(pages))):
 	PageSoup = soup(HtmlPage, "html.parser")
 	containers = PageSoup.find_all("div", {"class":"_4ddWXP"})
 	ratingsAll = PageSoup.find_all("div", {"class":"_3LWZlK"})
-	reviewsAll = PageSoup.find_all("span", {"class":"_2_R_DZ"})
 	pricesAll = PageSoup.find_all("div", {"class":"_30jeq3"})
 	oldPricesAll = PageSoup.find_all("div", {"class":"_3I9_wc"})
 	discountsAll = PageSoup.find_all("div", {"class":"_3Ay6Sb"})
-	imageLinksAll = PageSoup.find_all("div", {"class":"_4ddWXP"})
+	imageLinksAll = PageSoup.find_all("div", {"class":"_2rpwqI"})
 	#containers = PageSoup.find_all("div")
 	#print(containers)
 	#print("###########\n")
-	# print("Container Length     :" + str(len(containers)))
-	# print("ratingsAll Length    :" + str(len(ratingsAll)))
-	# print("reviewsAll Length    :" + str(len(reviewsAll)))
-	# print("pricesAll Length     :" + str(len(pricesAll)))
-	# print("oldPricesAll Length  :" + str(len(oldPricesAll)))
-	# print("discountsAll Length  :" + str(len(discountsAll)))
+	#print("Container Length     :" + str(len(containers)))
+	#print("ratingsAll Length    :" + str(len(ratingsAll)))
+	#print("pricesAll Length     :" + str(len(pricesAll)))
+	#print("oldPricesAll Length  :" + str(len(oldPricesAll)))
+	#print("discountsAll Length  :" + str(len(discountsAll)))
 
 	itemName = []
 	for container in containers:
@@ -72,16 +72,6 @@ for pg in range(0,(int(pages))):
 			pass
 		continue
 
-	review = []
-	for reviewSpan in reviewsAll:
-		#print(reviewSpan.text)
-		try:
-			review.append(reviewSpan.text)
-			#print(review)
-		except IndexError:
-			pass
-		continue
-
 	price = []
 	for pricesDiv in pricesAll:
 		#print(pricesDiv.text)
@@ -95,7 +85,7 @@ for pg in range(0,(int(pages))):
 	for oldPricesDiv in oldPricesAll:
 		#print(oldPricesDiv.text)
 		try:
-			oldPrice.append(oldPricesDiv.text[1])
+			oldPrice.append(oldPricesDiv.text)
 		except IndexError:
 			pass
 		continue
@@ -117,15 +107,14 @@ for pg in range(0,(int(pages))):
 			#print(imageLink)
 		except IndexError:
 			pass
-		continue		
+		continue
 
 	itemNumber = 0
 	
 	for itemNumber in range(0,len(containers)):
 		try:
-			#print("Printing##########################")
-			print ("##### " + itemName[itemNumber] + "|" + rating[itemNumber] + "|" + review[itemNumber] + "|" + price[itemNumber] + "|" + oldPrice[itemNumber] + "|" + discount[itemNumber])
-			OutWriter.writerow([itemName[itemNumber], rating[itemNumber], review[itemNumber], price[itemNumber], oldPrice[itemNumber], discount[itemNumber], "https://www.flipkart.com" + imageLink[itemNumber]])
+			print ("##### " + itemName[itemNumber] + "|" + rating[itemNumber] + "|" + price[itemNumber] + "|" + oldPrice[itemNumber] + "|" + discount[itemNumber])
+			OutWriter.writerow([itemName[itemNumber], rating[itemNumber], price[itemNumber], oldPrice[itemNumber], discount[itemNumber], "https://www.flipkart.com" + imageLink[itemNumber]])
 		except IndexError:
 			pass
 		continue
