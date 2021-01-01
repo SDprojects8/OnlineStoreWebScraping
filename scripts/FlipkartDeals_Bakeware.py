@@ -11,7 +11,7 @@ DT = datetime.datetime.now()
 DateStamp = DT.strftime('%Y-%m-%d_%H-%M-%S')
 
 # Inputs
-pages=1
+pages=20
 #pages = input("How many pages do you want to scan :  ")
 baseURL = 'https://www.flipkart.com/kitchen-cookware-serveware/bakeware/pr?sid=upp%2Cbgd&offer=nb:mp:114b43bd28,nb:mp:114c76b528&hpid=raTquFPh2dVzU7zKGnuhF6p7_Hsxr70nj65vMAAFKlc=&fm=neo%2Fmerchandising&iid=M_9911b1fd-044c-46b5-9132-43310cf1cfbb_2.RBVM3W9LQHB8&ssid=h6bfjo0ng00000001609335246968&otracker=clp_omu_infinite_Deals%2Bof%2Bthe%2BDay_3_2.dealCard.OMU_INFINITE_dotd-store_dotd-store_RBVM3W9LQHB8&cid=RBVM3W9LQHB8'
 #CSVpath = input("Provide the full path where CSV reports shall be stored ... :  ")
@@ -112,7 +112,7 @@ for pg in range(0,pages):
 	for itemNumber in range(0,len(containers)):
 		try:
 			print ("##### " + itemName[itemNumber] + "|" + rating[itemNumber] + "|" + price[itemNumber] + "|" + oldPrice[itemNumber] + "|" + discount[itemNumber])
-			OutWriter.writerow([itemName[itemNumber], rating[itemNumber], price[itemNumber], oldPrice[itemNumber], discount[itemNumber], "https://www.flipkart.com" + imageLink[itemNumber]])
+			OutWriter.writerow([itemName[itemNumber], rating[itemNumber], price[itemNumber], oldPrice[itemNumber], discount[itemNumber]]) #, "https://www.flipkart.com" + imageLink[itemNumber]])
 		except IndexError:
 			pass
 		continue
