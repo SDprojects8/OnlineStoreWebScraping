@@ -11,11 +11,13 @@ DT = datetime.datetime.now()
 DateStamp = DT.strftime('%Y-%m-%d_%H-%M-%S')
 
 # Inputs
-pages=20
-#pages = input("How many pages do you want to scan :  ")
-baseURL = 'https://www.flipkart.com/kitchen-cookware-serveware/bakeware/pr?sid=upp%2Cbgd&offer=nb:mp:114b43bd28,nb:mp:114c76b528&hpid=raTquFPh2dVzU7zKGnuhF6p7_Hsxr70nj65vMAAFKlc=&fm=neo%2Fmerchandising&iid=M_9911b1fd-044c-46b5-9132-43310cf1cfbb_2.RBVM3W9LQHB8&ssid=h6bfjo0ng00000001609335246968&otracker=clp_omu_infinite_Deals%2Bof%2Bthe%2BDay_3_2.dealCard.OMU_INFINITE_dotd-store_dotd-store_RBVM3W9LQHB8&cid=RBVM3W9LQHB8'
-#CSVpath = input("Provide the full path where CSV reports shall be stored ... :  ")
-CSVfile = "../collect/Flipkart_Deals.of.the.Day_Bakeware_%s.CSV" % DateStamp #Assuming you run from scripts directory
+# pages=20
+baseURL = input("Please provide the base URL       :  ")
+Purpose = input("Please provide a Topic of Interest:  ")
+pages = input("How many pages do you want to scan  :  ")
+#baseURL = 'https://www.flipkart.com/kitchen-cookware-serveware/bakeware/pr?sid=upp%2Cbgd&offer=nb:mp:114b43bd28,nb:mp:114c76b528&hpid=raTquFPh2dVzU7zKGnuhF6p7_Hsxr70nj65vMAAFKlc=&fm=neo%2Fmerchandising&iid=M_9911b1fd-044c-46b5-9132-43310cf1cfbb_2.RBVM3W9LQHB8&ssid=h6bfjo0ng00000001609335246968&otracker=clp_omu_infinite_Deals%2Bof%2Bthe%2BDay_3_2.dealCard.OMU_INFINITE_dotd-store_dotd-store_RBVM3W9LQHB8&cid=RBVM3W9LQHB8'
+CSVpath = input("Provide the full path where CSV reports shall be stored ... :  ")
+CSVfile = "../collect/Flipkart_BOTTLES_%s_.CSV" % DateStamp #Assuming you run from scripts directory
 #OutCSV = open(CSVpath + "/" + CSVfile, 'w', newline='')
 
 # Main
@@ -26,7 +28,7 @@ OutWriter = csv.writer(OutCSV)
 print("SlNo.|itemName|rating|price|oldPrice|discount")
 #OutWriter.writerow("SlNo.|itemName|rating|price|oldPrice|discount")
 OutWriter.writerow("IRPODL")
-for pg in range(0,pages):
+for pg in range(0,(int(pages))):
 	URL = (baseURL + "&page=" + str(pg))
 	#print("\n\n\n ############# \n Now URL is :    " + URL)
 	#URL = 'https://www.flipkart.com/audio-video/pr?sid=0pm&marketplace=FLIPKART&offer=nb:mp:1154f86928,nb:mp:11cc851a28&hpid=u0KJH80uWRAYeEJJpMIZYap7_Hsxr70nj65vMAAFKlc=&fm=neo%2Fmerchandising&iid=M_62ce2069-ba72-4633-a9f3-272c137582ba_2.VLO9AZPF3DJW&ppt=clp&ppn=dotd-store&ssid=m03cg1ws6o0000001609272953413&otracker=clp_omu_infinite_Deals%2Bof%2Bthe%2BDay_2_2.dealCard.OMU_INFINITE_dotd-store_dotd-store_VLO9AZPF3DJW&cid=VLO9AZPF3DJW'
@@ -112,7 +114,7 @@ for pg in range(0,pages):
 	for itemNumber in range(0,len(containers)):
 		try:
 			print ("##### " + itemName[itemNumber] + "|" + rating[itemNumber] + "|" + price[itemNumber] + "|" + oldPrice[itemNumber] + "|" + discount[itemNumber])
-			OutWriter.writerow([itemName[itemNumber], rating[itemNumber], price[itemNumber], oldPrice[itemNumber], discount[itemNumber]]) #, "https://www.flipkart.com" + imageLink[itemNumber]])
+			OutWriter.writerow([itemName[itemNumber], rating[itemNumber], price[itemNumber], oldPrice[itemNumber], discount[itemNumber], "https://www.flipkart.com" + imageLink[itemNumber]])
 		except IndexError:
 			pass
 		continue
