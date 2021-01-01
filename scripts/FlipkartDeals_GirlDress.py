@@ -11,7 +11,7 @@ DT = datetime.datetime.now()
 DateStamp = DT.strftime('%Y-%m-%d_%H-%M-%S')
 
 # Inputs
-pages=2
+pages=20
 #pages = input("How many pages do you want to scan :  ")
 baseURL = 'https://www.flipkart.com/clothing-and-accessories/pr?sid=clo&otracker=categorytree&p%5B%5D=facets.ideal_for%255B%255D%3DGirls&p%5B%5D=facets.ideal_for%255B%255D%3DBoys%2B%2526%2BGirls&p%5B%5D=facets.ideal_for%255B%255D%3DBaby%2BBoys%2B%2526%2BBaby%2BGirls&p%5B%5D=facets.ideal_for%255B%255D%3DBaby%2BGirls&otracker=nmenu_sub_Baby%20%26%20Kids_0_Girls%27%20Clothing'
 #CSVpath = input("Provide the full path where CSV reports shall be stored ... :  ")
@@ -134,7 +134,7 @@ for pg in range(0,pages):
 		try:
 			# Link will not be printed but captured in csv file only
 			print ("##### " + brand[itemNumber] + "|" + itemName[itemNumber] + "|" + itemType[itemNumber] + "|" + price[itemNumber] + "|" + oldPrice[itemNumber] + "|" + discount[itemNumber]) # + "|" + imageLink[itemNumber])
-			OutWriter.writerow([brand[itemNumber], itemName[itemNumber], itemType[itemNumber], price[itemNumber], oldPrice[itemNumber], discount[itemNumber], "https://flipkart" + imageLink[itemNumber]])
+			OutWriter.writerow([brand[itemNumber], itemName[itemNumber], itemType[itemNumber], price[itemNumber], oldPrice[itemNumber], discount[itemNumber], "https://flipkart.com" + imageLink[itemNumber]])
 		except IndexError:
 			pass
 		continue
