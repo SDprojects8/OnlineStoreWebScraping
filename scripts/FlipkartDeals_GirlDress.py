@@ -11,7 +11,7 @@ DT = datetime.datetime.now()
 DateStamp = DT.strftime('%Y-%m-%d_%H-%M-%S')
 
 # Inputs
-pages=20
+pages=2
 #pages = input("How many pages do you want to scan :  ")
 baseURL = 'https://www.flipkart.com/clothing-and-accessories/pr?sid=clo&otracker=categorytree&p%5B%5D=facets.ideal_for%255B%255D%3DGirls&p%5B%5D=facets.ideal_for%255B%255D%3DBoys%2B%2526%2BGirls&p%5B%5D=facets.ideal_for%255B%255D%3DBaby%2BBoys%2B%2526%2BBaby%2BGirls&p%5B%5D=facets.ideal_for%255B%255D%3DBaby%2BGirls&otracker=nmenu_sub_Baby%20%26%20Kids_0_Girls%27%20Clothing'
 #CSVpath = input("Provide the full path where CSV reports shall be stored ... :  ")
@@ -23,9 +23,9 @@ CSVfile = "../collect/Flipkart_GirlDresses_%s_.CSV" % DateStamp #Assuming you ru
 OutCSV = open(CSVfile, 'w', encoding="utf-8", newline='')
 OutWriter = csv.writer(OutCSV)
 
-print("Brand|ItemName|ItemType|price|oldPrice|discount")
+print("Brand|ItemName|ItemType|price|oldPrice|discount|Link")
 #OutWriter.writerow("SlNo.|itemName|rating|price|oldPrice|discount")
-OutWriter.writerow("BITPOD")
+OutWriter.writerow("BITPODL")
 for pg in range(0,pages):
 	URL = (baseURL + "&page=" + str(pg))
 	#print("\n\n\n ############# \n Now URL is :    " + URL)
@@ -43,7 +43,7 @@ for pg in range(0,pages):
 	pricesAll = PageSoup.find_all("div", {"class":"_30jeq3"})
 	oldPricesAll = PageSoup.find_all("div", {"class":"_3I9_wc"})
 	discountsAll = PageSoup.find_all("div", {"class":"_3Ay6Sb"})
-	imageLinksAll = PageSoup.find_all("img", {"class":"_2r_T1I"})
+	imageLinksAll = PageSoup.find_all("div", {"class":"_1xHGtK _373qXS"})
 	#containers = PageSoup.find_all("div")
 	#print(containers)
 	#print("###########\n")
@@ -120,9 +120,10 @@ for pg in range(0,pages):
 
 	imageLink = []
 	for imageLinkDiv in imageLinksAll:
-		print(imageLinkDiv.text)
+		#print(imageLinkDiv.text)
 		try:
-			imageLink.append(imageLinkDiv.img['src'])
+			imageLink.append(imageLinkDiv.a['href'])
+			#print(imageLink)
 		except IndexError:
 			pass
 		continue
@@ -131,8 +132,9 @@ for pg in range(0,pages):
 	
 	for itemNumber in range(0,len(itemsALL)):
 		try:
-			print ("##### " + brand[itemNumber] + "|" + itemName[itemNumber] + "|" + itemType[itemNumber] + "|" + price[itemNumber] + "|" + oldPrice[itemNumber] + "|" + discount[itemNumber])
-			OutWriter.writerow([brand[itemNumber], itemName[itemNumber], itemType[itemNumber], price[itemNumber], oldPrice[itemNumber], discount[itemNumber], imageLink[itemNumber]])
+			# Link will not be printed but captured in csv file only
+			print ("##### " + brand[itemNumber] + "|" + itemName[itemNumber] + "|" + itemType[itemNumber] + "|" + price[itemNumber] + "|" + oldPrice[itemNumber] + "|" + discount[itemNumber]) # + "|" + imageLink[itemNumber])
+			OutWriter.writerow([brand[itemNumber], itemName[itemNumber], itemType[itemNumber], price[itemNumber], oldPrice[itemNumber], discount[itemNumber], "https://flipkart" + imageLink[itemNumber]])
 		except IndexError:
 			pass
 		continue
