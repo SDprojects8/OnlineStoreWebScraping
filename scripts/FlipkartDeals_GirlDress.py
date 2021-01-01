@@ -134,7 +134,7 @@ for pg in range(0,pages):
 		try:
 			# Link will not be printed but captured in csv file only
 			print ("##### " + brand[itemNumber] + "|" + itemName[itemNumber] + "|" + itemType[itemNumber] + "|" + price[itemNumber] + "|" + oldPrice[itemNumber] + "|" + discount[itemNumber]) # + "|" + imageLink[itemNumber])
-			OutWriter.writerow([brand[itemNumber], itemName[itemNumber], itemType[itemNumber], price[itemNumber], oldPrice[itemNumber], discount[itemNumber], "https://flipkart.com" + imageLink[itemNumber]])
+			OutWriter.writerow([brand[itemNumber], itemName[itemNumber], itemType[itemNumber], price[itemNumber], oldPrice[itemNumber], discount[itemNumber], "https://www.flipkart.com" + imageLink[itemNumber]])
 		except IndexError:
 			pass
 		continue

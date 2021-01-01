@@ -38,6 +38,7 @@ for pg in range(0,pages):
 	pricesAll = PageSoup.find_all("div", {"class":"_30jeq3"})
 	oldPricesAll = PageSoup.find_all("div", {"class":"_3I9_wc"})
 	discountsAll = PageSoup.find_all("div", {"class":"_3Ay6Sb"})
+	imageLinksAll = PageSoup.find_all("div", {"class":"_4ddWXP"})
 	#containers = PageSoup.find_all("div")
 	#print(containers)
 	#print("###########\n")
@@ -93,12 +94,22 @@ for pg in range(0,pages):
 			pass
 		continue
 
+	imageLink = []
+	for imageLinkDiv in imageLinksAll:
+		#print(imageLinkDiv.text)
+		try:
+			imageLink.append(imageLinkDiv.a['href'])
+			#print(imageLink)
+		except IndexError:
+			pass
+		continue		
+
 	itemNumber = 0
 	
 	for itemNumber in range(0,len(containers)):
 		try:
 			print ("##### " + itemName[itemNumber] + "|" + rating[itemNumber] + "|" + price[itemNumber] + "|" + oldPrice[itemNumber] + "|" + discount[itemNumber])
-			OutWriter.writerow([itemName[itemNumber], rating[itemNumber], price[itemNumber], oldPrice[itemNumber], discount[itemNumber]])
+			OutWriter.writerow([itemName[itemNumber], rating[itemNumber], price[itemNumber], oldPrice[itemNumber], discount[itemNumber], "https://www.flipkart.com" + imageLink[itemNumber]])
 		except IndexError:
 			pass
 		continue
