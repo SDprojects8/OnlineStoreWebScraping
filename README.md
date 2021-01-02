@@ -21,9 +21,10 @@ Web Scraping Scripts for
 - [ ] Search any product on NewEgg ![#f03c15](https://via.placeholder.com/15/f03c15/000000?text=+)
 
 - [ ] Get personalized rating ![#f03c15](https://via.placeholder.com/15/f03c15/000000?text=+)
+	  
 	  on products to get the best quality and best value product from these Online Shopping Sites
 
->This site os made with GitHub Pages and For more details see [GitHub Flavored Markdown](https://guides.github.com/features/mastering-markdown/).
+>This site is made with GitHub Pages and For more details see [GitHub Flavored Markdown](https://guides.github.com/features/mastering-markdown/).
 
 ##### Welcome to GitHub Pages
 We can use the [editor on GitHub](https://github.com/SDprojects8/OnlineStoreWebScraping/edit/main/README.md) to maintain and preview the content for our website in Markdown files.
