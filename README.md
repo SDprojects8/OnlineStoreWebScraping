@@ -17,13 +17,17 @@ Web Scraping Scripts for
 	and get output as in above script
 
 - [ ] Search any product on Flipkart ![#f03c15](https://via.placeholder.com/15/f03c15/000000?text=+)
-- [ ] Amazon 
+- [ ] Search any product on Amazon ![#f03c15](https://via.placeholder.com/15/f03c15/000000?text=+)
+- [ ] Search any product on NewEgg ![#f03c15](https://via.placeholder.com/15/f03c15/000000?text=+)
 
->For more details see [GitHub Flavored Markdown](https://guides.github.com/features/mastering-markdown/).
+- [ ] Get personalized rating ![#f03c15](https://via.placeholder.com/15/f03c15/000000?text=+)
+	  on products to get the best quality and best value product from these Online Shopping Sites
+
+>This site os made with GitHub Pages and For more details see [GitHub Flavored Markdown](https://guides.github.com/features/mastering-markdown/).
 
 ##### Welcome to GitHub Pages
-You can use the [editor on GitHub](https://github.com/SDprojects8/OnlineStoreWebScraping/edit/main/README.md) to maintain and preview the content for your website in Markdown files.
-Whenever you commit to this repository, GitHub Pages will run [Jekyll](https://jekyllrb.com/) to rebuild the pages in your site, from the content in your Markdown files.
+We can use the [editor on GitHub](https://github.com/SDprojects8/OnlineStoreWebScraping/edit/main/README.md) to maintain and preview the content for our website in Markdown files.
+Whenever we commit to this repository, GitHub Pages will run [Jekyll](https://jekyllrb.com/) to rebuild the pages in our site, from the content in our Markdown files.
 
 ```markdown
 REF: Syntax highlighted code block
@@ -32,7 +36,7 @@ REF: Syntax highlighted code block
 ```
 
 ##### Jekyll Themes
-Your Pages site will use the layout and styles from the Jekyll theme you have selected in your [repository settings](https://github.com/SDprojects8/OnlineStoreWebScraping/settings). The name of this theme is saved in the Jekyll `_config.yml` configuration file.
+Our Pages site will use the layout and styles from the Jekyll theme we have selected in our [repository settings](https://github.com/SDprojects8/OnlineStoreWebScraping/settings). The name of this theme is saved in the Jekyll `_config.yml` configuration file.
 
 ##### Support or Contact
 Having trouble with Pages? Check out our [documentation](https://docs.github.com/categories/github-pages-basics/) or [contact support](https://github.com/contact) and we’ll help you sort it out.
