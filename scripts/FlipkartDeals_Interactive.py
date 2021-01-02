@@ -17,9 +17,9 @@ Purpose = input("Please provide a Topic of Interest  :  ")
 pages =   input("How many pages do you want to scan  :  ")
 
 CSVpath = input("Provide the full path where CSV reports shall be stored ... :  ")
-CSVfile = "Flipkart_INTERACTIVE_%s.CSV" % DateStamp #Assuming you run from scripts directory
+CSVfile = "Flipkart_INTERACTIVE_%s_%s.CSV" % (Purpose, DateStamp) #Assuming you run from scripts directory
 #OutCSV = open(CSVpath + "/" + CSVfile, 'w', newline='')
-OutCSV = open(CSVfile, 'w', encoding="utf-8", newline='')
+OutCSV = open(CSVpath + "/" + CSVfile, 'w', encoding="utf-8", newline='')
 OutWriter = csv.writer(OutCSV)
 
 #print("SlNo.|itemName|rating|price|oldPrice|discount")
@@ -123,7 +123,7 @@ for pg in range(0,(int(pages))):
 	
 	for itemNumber in range(0,len(containers)):
 		try:
-			#print("Printing##########################")
+			print("Printing Line # %d " % itemNumber)
 			print ("##### " + itemName[itemNumber] + "|" + rating[itemNumber] + "|" + review[itemNumber] + "|" + price[itemNumber] + "|" + oldPrice[itemNumber] + "|" + discount[itemNumber])
 			OutWriter.writerow([itemName[itemNumber], rating[itemNumber], review[itemNumber], price[itemNumber], oldPrice[itemNumber], discount[itemNumber], "https://www.flipkart.com" + imageLink[itemNumber]])
 		except IndexError:
