@@ -22,7 +22,7 @@ baseURL = 'https://www.flipkart.com/audio-video/pr?sid=0pm&marketplace=FLIPKART&
 
 print("SlNo.|itemName|rating|price|oldPrice|discount")
 #OutWriter.writerow("SlNo.|itemName|rating|price|oldPrice|discount")
-OutWriter.writerow("IRPOD")
+OutWriter.writerow("IRVPODL")
 for pg in range(0,pages):
 	URL = (baseURL + "&page=" + str(pg))
 	#print("\n\n\n ############# \n Now URL is :    " + URL)
@@ -35,6 +35,7 @@ for pg in range(0,pages):
 	PageSoup = soup(HtmlPage, "html.parser")
 	containers = PageSoup.find_all("div", {"class":"_4ddWXP"})
 	ratingsAll = PageSoup.find_all("div", {"class":"_3LWZlK"})
+	reviewsAll = PageSoup.find_all("span", {"class":"_2_R_DZ"})
 	pricesAll = PageSoup.find_all("div", {"class":"_30jeq3"})
 	oldPricesAll = PageSoup.find_all("div", {"class":"_3I9_wc"})
 	discountsAll = PageSoup.find_all("div", {"class":"_3Ay6Sb"})
@@ -66,6 +67,16 @@ for pg in range(0,pages):
 		except IndexError:
 			pass
 		continue
+
+	review = []
+	for reviewSpan in reviewsAll:
+		#print(reviewSpan.text)
+		try:
+			review.append(reviewSpan.text)
+			#print(review)
+		except IndexError:
+			pass
+		continue		
 
 	price = []
 	for pricesDiv in pricesAll:
@@ -108,8 +119,10 @@ for pg in range(0,pages):
 	
 	for itemNumber in range(0,len(containers)):
 		try:
-			print ("##### " + itemName[itemNumber] + "|" + rating[itemNumber] + "|" + price[itemNumber] + "|" + oldPrice[itemNumber] + "|" + discount[itemNumber])
-			OutWriter.writerow([itemName[itemNumber], rating[itemNumber], price[itemNumber], oldPrice[itemNumber], discount[itemNumber], "https://www.flipkart.com" + imageLink[itemNumber]])
+			#print ("##### " + itemName[itemNumber] + "|" + rating[itemNumber] + "|" + price[itemNumber] + "|" + oldPrice[itemNumber] + "|" + discount[itemNumber])
+			#OutWriter.writerow([itemName[itemNumber], rating[itemNumber], price[itemNumber], oldPrice[itemNumber], discount[itemNumber], "https://www.flipkart.com" + imageLink[itemNumber]])
+			print ("##### " + itemName[itemNumber] + "|" + rating[itemNumber] + "|" + review[itemNumber] + "|" + price[itemNumber] + "|" + oldPrice[itemNumber] + "|" + discount[itemNumber])
+			OutWriter.writerow([itemName[itemNumber], rating[itemNumber], review[itemNumber], price[itemNumber], oldPrice[itemNumber], discount[itemNumber], "https://www.flipkart.com" + imageLink[itemNumber]])
 		except IndexError:
 			pass
 		continue
