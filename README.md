@@ -1,20 +1,30 @@
-### Scrape products lists from Online Shopping Stores like Flipkart Amazon NewEgg
+## Scrape products lists :magnet: from Online Shopping Stores like Flipkart Amazon NewEgg
 
 Web Scraping Scripts for 
-- [X] Specific Pages on Flipkart to get for each product ![#c5f015](https://via.placeholder.com/15/c5f015/000000?text=+)
+- [X] Specific Pages on Flipkart to get for each product th below **OUTPUT** ![#c5f015](https://via.placeholder.com/15/c5f015/000000?text=+)
 	- Rating
 	- Number of Reviews
 	- Price
 	- Old / Original Price
 	- Discount %
 	- Link to the product
+	
+	** Scripts ** 
+	
+	```
+	/scripts/[FlipkartDeals_Bakeware.py](/scripts/FlipkartDeals_Bakeware.py)
+	/scripts/[FlipkartDeals_GirlDress.py](/scripts/FlipkartDeals_GirlDress.py)
+	/scripts/[FlipkartDeals_HeadPhones.py](/scripts/FlipkartDeals_HeadPhones.py)
+	```
 
-- [X] Interactively provide ![#ffff00](https://via.placeholder.com/15/ffff00/000000?text=+)
+- [X] Interactively provide the belwo **INPUT** ![#ffff00](https://via.placeholder.com/15/ffff00/000000?text=+)
 	- Flipkart Product Category Page URL (Example - [Headphones](https://www.flipkart.com/headphones/pr?sid=fcn&otracker=categorytree))
 	- Number of pages to scrape
 	- Category / Type of Product [to append to output CSV filename]
 	- path to save output files
 	and get output as in above script
+
+> TODO
 
 - [ ] Search any product on Flipkart ![#f03c15](https://via.placeholder.com/15/f03c15/000000?text=+)
 - [ ] Search any product on Amazon ![#f03c15](https://via.placeholder.com/15/f03c15/000000?text=+)
