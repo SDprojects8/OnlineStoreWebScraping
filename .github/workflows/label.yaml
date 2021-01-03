@@ -3,7 +3,7 @@ name: Label PRs based on files changed
 on: [pull_request]
 
 jobs:
-  label:
+  label: auto-pr
 
     runs-on: ubuntu-latest
 
